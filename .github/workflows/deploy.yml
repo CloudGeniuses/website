@@ -24,7 +24,7 @@ jobs:
         USER: ${{ secrets.EC2_USER }}
       run: |
         ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-          cd /path/to/your/app
+          cd cloudgenius
           git pull origin main
           # Restart application, for example using systemctl or pm2
           # systemctl restart myapp
