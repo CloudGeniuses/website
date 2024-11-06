@@ -1,0 +1,33 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Only deploy when there's a push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+    - name: Deploy to EC2
+      env:
+        HOST: ${{ secrets.EC2_HOST }}
+        USER: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+          cd /path/to/your/app
+          git pull origin main
+          # Restart application, for example using systemctl or pm2
+          # systemctl restart myapp
+          # or
+          pm2 restart all
+        EOF
