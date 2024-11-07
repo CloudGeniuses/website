@@ -1,33 +1,39 @@
-name: Deploy to EC2
+name: Deploy React App to EC2
 
 on:
   push:
     branches:
-      - main  # Only deploy when there's a push to the main branch
+      - main  # Run this action on pushes to the main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.4
-      with:
-        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Install Node.js and dependencies
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Deploy to EC2
-      env:
-        HOST: ${{ secrets.EC2_HOST }}
-        USER: ${{ secrets.EC2_USER }}
-      run: |
-        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-          cd cloudgenius
-          git pull origin main
-          # Restart application, for example using systemctl or pm2
-          # systemctl restart myapp
-          # or
-          pm2 restart all
-        EOF
+      - run: |
+          npm install
+          npm run build  # Build the React app
+          
+      - name: Copy files via SSH
+        env:
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+
+        run: |
+          echo "$SSH_KEY" > private_key.pem
+          chmod 600 private_key.pem
+
+          # Copy build files to EC2 instance
+          scp -o StrictHostKeyChecking=no -i private_key.pem -r build/* $EC2_USER@$EC2_HOST:/var/www/html
+
+      - name: Clean up
+        run: rm private_key.pem
