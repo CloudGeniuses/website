@@ -11,25 +11,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Node.js and dependencies
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - run: |
+      - name: Install dependencies and build
+        run: |
           npm install
           CI=false npm run build
-          
+
       - name: Copy files via SSH
         env:
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
-
         run: |
-          echo "$SSH_KEY" > private_key.pem
+          echo "$SSH_KEY" | tr -d '\r' | base64 -d > private_key.pem
           chmod 600 private_key.pem
 
           # Copy build files to EC2 instance
