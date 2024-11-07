@@ -34,7 +34,7 @@ jobs:
           chmod 600 private_key.pem
 
           # Copy build files to EC2 instance
-          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST "sudo mkdir -p /var/www/html"
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST "sudo mkdir -p /var/www/html && sudo chown -R $EC2_USER:$EC2_USER /var/www/html && sudo chmod -R 755 /var/www/html"
           scp -o StrictHostKeyChecking=no -i private_key.pem -r build/* $EC2_USER@$EC2_HOST:/var/www/html
 
       - name: Clean up
