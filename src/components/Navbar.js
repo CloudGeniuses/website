@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Link, useLocation, useNavigate  } from 'react-router-dom'
+import { Link,useLocation, useNavigate  } from 'react-router-dom'
 import { scroller  } from 'react-scroll'
 import useScrollToSection from '../hooks/useScrollToSection'
 import { Menu, X } from 'lucide-react'
-
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation();
@@ -20,7 +19,6 @@ export default function Navbar() {
   const handleClick = (section) => {
     console.log(location.pathname, section)
     if (location.pathname === "/") {
-      // If already on the home page, scroll to the "contact" section
       scroller.scrollTo(section, { smooth: true, duration: 500 });
     } else {
         setScrollTo(prev => ({ ...prev, [section]: true }));
@@ -36,7 +34,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link to="/" className="text-2xl font-bold text-blue-600">CloudGenius</Link>
+            <Link to="/" className="text-2xl font-extrabold text-blue-600 font-garamond">CloudGenius</Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <button variant="ghost" onClick={() => setIsMenuOpen(true)}>
@@ -44,13 +42,13 @@ export default function Navbar() {
               <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <nav className="hidden md:flex space-x-10">
+          <nav className="hidden md:flex space-x-10 font-roboto">
             {navItems.map((item) => (
                 item.href.startsWith('/') ?
-                <Link key={item.name} to={item.href} className="text-base font-medium text-gray-500 hover:text-gray-900">
+                <Link key={item.name} to={item.href} className={`text-sm flex items-center gap-2 font-medium text-gray-900 hover:text-gray-900 ${location.pathname===item.href ?"border-l-[4px] border-l-yellow-600 pl-2":""}`}>
                     {item.name}
                 </Link>
-              :   <button key={item.name} onClick={() =>handleClick(item.href)} className="text-base font-medium text-gray-500 hover:text-gray-900">{item.name}</button>
+              :   <button key={item.name} onClick={() =>handleClick(item.href)} className="text-sm font-medium text-gray-900 hover:text-gray-900">{item.name}</button>
             ))}
           </nav>
         </div>

@@ -5,7 +5,11 @@ module.exports = {
     "./pages/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: { fontFamily:{
+      garamond:['EB Garamond, serif'],
+      lato:['Lato, serif'],
+      roboto:['Roboto, serif']
+    }},
   },
   plugins: [],
 }

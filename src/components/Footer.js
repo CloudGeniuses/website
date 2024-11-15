@@ -8,7 +8,7 @@ function Footer() {
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div className="space-y-8 xl:col-span-1">
-              <span className="text-2xl font-bold text-white">CloudGenius</span>
+              <span className="text-2xl font-extrabold text-white font-garamond">CloudGenius</span>
               <p className="text-gray-300 text-base">
                 Empowering businesses with innovative technology solutions.
               </p>
@@ -19,7 +19,7 @@ function Footer() {
             <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
+                  <h3 className="text-sm font-semibold text-yellow-600 tracking-wider uppercase">Solutions</h3>
                   <ul className="mt-4 space-y-4">
                     <li>
                       <a href="#" className="text-base text-gray-300 hover:text-white">
@@ -44,7 +44,7 @@ function Footer() {
                   </ul>
                 </div>
                 <div className="mt-12 md:mt-0">
-                  <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3>
+                  <h3 className="text-sm font-semibold text-yellow-600 tracking-wider uppercase">Support</h3>
                   <ul className="mt-4 space-y-4">
                     <li>
                       <a href="#" className="text-base text-gray-300 hover:text-white">
@@ -71,7 +71,7 @@ function Footer() {
               </div>
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                  <h3 className="text-sm font-semibold text-yellow-600 tracking-wider uppercase">Company</h3>
                   <ul className="mt-4 space-y-4">
                     <li>
                       <a href="#" className="text-base text-gray-300 hover:text-white">
@@ -101,7 +101,7 @@ function Footer() {
                   </ul>
                 </div>
                 <div className="mt-12 md:mt-0">
-                  <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+                  <h3 className="text-sm font-semibold text-yellow-600 tracking-wider uppercase">Legal</h3>
                   <ul className="mt-4 space-y-4">
                     <li>
                       <a href="#" className="text-base text-gray-300 hover:text-white">
